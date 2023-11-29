@@ -41,7 +41,7 @@ COPY vllm vllm
 ENTRYPOINT ["python3", "-m", "pytest", "tests"]
 
 # use CUDA base as CUDA runtime dependencies are already installed via pip
-FROM nvidia/cuda:12.1.0-base-ubuntu22.04 AS vllm-base
+FROM nvidia/cuda:11.8.0-base-ubuntu22.04 AS vllm-base
 
 # libnccl required for ray
 RUN apt-get update -y \
