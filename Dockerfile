@@ -3,6 +3,13 @@ FROM nvidia/cuda:12.1.0-devel-ubuntu22.04 AS dev
 RUN apt-get update -y \
     && apt-get install -y python3-pip
 
+RUN apt-get install nvidia-dkms-535 nvidia-utils-535 nvidia-driver-535 cuda-drivers-535
+
+RUN sudo apt-mark hold nvidia-dkms-535
+RUN sudo apt-mark hold nvidia-utils-535
+RUN sudo apt-mark hold nvidia-driver-535
+RUN sudo apt-mark hold cuda-drivers-535
+
 WORKDIR /workspace
 
 # install build and runtime dependencies
@@ -46,6 +53,13 @@ FROM nvidia/cuda:12.1.0-base-ubuntu22.04 AS vllm-base
 # libnccl required for ray
 RUN apt-get update -y \
     && apt-get install -y python3-pip
+
+RUN apt-get install nvidia-dkms-535 nvidia-utils-535 nvidia-driver-535 cuda-drivers-535
+
+RUN sudo apt-mark hold nvidia-dkms-535
+RUN sudo apt-mark hold nvidia-utils-535
+RUN sudo apt-mark hold nvidia-driver-535
+RUN sudo apt-mark hold cuda-drivers-535
 
 WORKDIR /workspace
 COPY requirements.txt requirements.txt
